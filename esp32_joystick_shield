@@ -1,0 +1,57 @@
+from machine import Pin, ADC
+from time import sleep
+bt_a = Pin(16, Pin.IN, Pin.PULL_DOWN)
+bt_b = Pin(17, Pin.IN, Pin.PULL_DOWN)
+bt_c = Pin(18, Pin.IN, Pin.PULL_DOWN)
+bt_d = Pin(19, Pin.IN, Pin.PULL_DOWN)
+bt_e = Pin(22, Pin.IN, Pin.PULL_DOWN)
+bt_f = Pin(23, Pin.IN, Pin.PULL_DOWN)
+bt_joy = Pin(21, Pin.IN, Pin.PULL_DOWN)
+
+x_pot = ADC(Pin(34))
+y_pot=ADC(Pin(35))
+
+x_pot.atten(ADC.ATTN_11DB)       
+y_pot.atten(ADC.ATTN_11DB)       
+
+while True:
+    x_pot_value = x_pot.read()
+    y_pot_value = y_pot.read()
+    print(x_pot_value ,y_pot_value)
+    sleep(0.1)
+      
+    if 2000>=x_pot_value>=1700 and 2000>=y_pot_value>=1700 :
+        print("sabit")
+
+    if 4095>=x_pot_value>4000 and 2000>y_pot_value>=1700:
+        print("sağ")
+
+    if 100>=x_pot_value>=0 and 2000>=y_pot_value>=1700:
+        print("sol")
+        
+    if 2000>=x_pot_value>=1700 and 4095>=y_pot_value>=4000:
+        print("yukarı")
+
+    if 2000>=x_pot_value>=1700 and 100>=y_pot_value>=0:
+        print("aşağı")
+        
+    if(bt_a.value()==0):
+        print("a")
+
+    if(bt_b.value()==0):
+        print("b")
+
+    if(bt_c.value()==0):
+        print("c")
+
+    if(bt_d.value()==0):
+        print("d")
+        
+    if(bt_e.value()==0):
+        print("e")
+        
+    if(bt_f.value()==0):
+        print("f")
+       
+    if(bt_joy.value()==0):
+        print("joy")
